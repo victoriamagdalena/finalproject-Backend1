@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>New Normal Church Service</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+      type="text/css"
+    />
+
+    <script 
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" 
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" 
+    crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            padding:1%;
+        }
+        .separator {
+            margin-top: 10px;
+        }
+    </style>
+
+  </head>
+
+  <body id="root">
+
+    <div class="ui grid container">
+        <div class="column centered sixteen wide">
+            <h1>New Normal Visit Registration</h1>
+            <h4>Dalam rangka menyambut New Normal, Gereja kembali membuka offline service dengan pembatasan jumlah jemaat. Untuk itu, jemaat diminta untuk mengisi formulir registrasi sebelum datang beribadah. QR code yang didapat setelah berhasil mendaftar berfungsi sebagai tiket masuk ke dalam gedung Gereja.</h4>
+
+            <form class="ui form eight wide" autocomplete="off">
+
+                <div class="ui primary field big input fluid">
+                  <input type="text" name="fullName" placeholder="Enter your full name">
+                </div>
+
+                <div class="ui primary field big input fluid">
+                  <input type="number" name="age" placeholder="Enter your age">
+                </div>
+
+                <div class="ui primary field big input fluid">
+                    <textarea name="address" rows="5" style="overflow:auto;resize:none" placeholder="Enter your home address"></textarea>
+                </div>
+
+                <div class="ui primary field big input fluid">
+                  <input type="tel" name="phoneNumber" placeholder="Enter your phone number">
+                </div>
+
+                <div class="ui primary field big input fluid">
+                  <input type="email" name="email" placeholder="Enter your email address">
+                </div>
+
+                <div class="ui primary field big input fluid">
+                  <label>Time Slot</label>
+                  <select name="timeSlot">
+                    <option value="07.15">07.15</option>
+                    <option value="09.00">09.00</option>
+                    <option value="13.00">13.00</option>
+                    <option value="16.00">16.00</option>
+                  </select>
+                </div>
+
+                <button class="ui primary button" 
+                 onclick="location.href='pass.html'">
+                  Submit
+                </button>
+              </form>
+
+            <div class="ui divider"></div>
+
+            <div id="feed"></div>
+
+        </div>
+    </div>
+  </body>
+
+  <script>
+  $(function() {
+    refetchBiodatas()
+    console.log("hana, dul, set!")
+    $("form").submit(function(event){
+      event.preventDefault();
+      var payload = objectifyForm( $( this ).serializeArray() );
+
+      $.post("api/biodata/post", JSON.stringify(payload), function (data) {
+        $("input[type=text], textarea").val("")
+        refetchBiodatas()
+      });
+    });
+  });
+
+    function refetchBiodatas() {
+        $.get( "api/biodata/list", function( data ) {
+          $("#feed").empty()
+          $.each(data.result.reverse(), function(i, item) {
+            // if(!data.result[i].from) {
+            //   data.result[i].from = "N.A."
+            // }
+              // $("#feed").append(data.result[i].fullName + data.result[i].age + data.result[i].address + data.result[i].phoneNumber + data.result[i].email + data.result[i].timeSlot)
+          });
+        });
+    }
+
+    function objectifyForm(formArray) {
+        var returnArray = {};
+        for (var i = 0; i < formArray.length; i++){
+            returnArray[formArray[i]['name']] = formArray[i]['value'];
+        }
+        return returnArray;
+    }
+
+  </script>
+</html>
