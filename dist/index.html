@@ -113,5 +113,11 @@
         return returnArray;
     }
 
+    function compareJemaat(payload) {
+      $.post("api/biodata/compare", JSON.stringify(payload), function (data) {
+        $("input[type=text], textarea").val("")
+      });
+    }
+
   </script>
 </html>

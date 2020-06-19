@@ -30,67 +30,37 @@ func PostBiodata(context *gin.Context) {
 		return
 	}
 
+	// count(input.Time_Slot)
 	biodata := models.Biodata{Full_Name: input.Full_Name, Age: input.Age, Address: input.Address, Phone_Number: input.Phone_Number, Email: input.Email, Time_Slot: input.Time_Slot}
 	models.DB.Create(&biodata)
 
 	context.JSON(201, gin.H{"success": true, "result": biodata, "errorMessage": nil})
 
-	// count1 = db.Model(&Biodata{}).Where("timeslot = ?", "07.15").Count(&count)
-	// count2 = db.Model(&Biodata{}).Where("timeslot = ?", "09.00").Count(&count)
-	// count3 = db.Model(&Biodata{}).Where("timeslot = ?", "13.00").Count(&count)
-	// count4 = db.Model(&Biodata{}).Where("timeslot = ?", "16.00").Count(&count)
-
-	// if count1 > 50 {
-	// 	return "Maaf, kuota jemaat untuk sesi ibadah jam 07.15 sudah penuh."
-	// } else {
-	// 	biodata := models.Biodata{Full_Name: input.Full_Name, Age: input.Age, Address: input.Address, Phone_Number: input.Phone_Number, Email: input.Email, Time_Slot: input.Time_Slot}
-	// 	models.DB.Create(&biodata)
-	// 	context.JSON(201, gin.H{"success": true, "result": biodata, "errorMessage": nil})
-	// }
-
-	// if count2 > 50 {
-	// 	return "Maaf, kuota jemaat untuk sesi ibadah jam 09.00 sudah penuh."
-	// } else {
-	// 	biodata := models.Biodata{Full_Name: input.Full_Name, Age: input.Age, Address: input.Address, Phone_Number: input.Phone_Number, Email: input.Email, Time_Slot: input.Time_Slot}
-	// 	models.DB.Create(&biodata)
-	// 	context.JSON(201, gin.H{"success": true, "result": biodata, "errorMessage": nil})
-	// }
-
-	// if count3 > 50 {
-	// 	return "Maaf, kuota jemaat untuk sesi ibadah jam 13.00 sudah penuh."
-	// } else {
-	// 	biodata := models.Biodata{Full_Name: input.Full_Name, Age: input.Age, Address: input.Address, Phone_Number: input.Phone_Number, Email: input.Email, Time_Slot: input.Time_Slot}
-	// 	models.DB.Create(&biodata)
-	// 	context.JSON(201, gin.H{"success": true, "result": biodata, "errorMessage": nil})
-	// }
-
-	// if count4 > 50 {
-	// 	return "Maaf, kuota jemaat untuk sesi ibadah jam 16.00 sudah penuh."
-	// } else {
-	// 	biodata := models.Biodata{Full_Name: input.Full_Name, Age: input.Age, Address: input.Address, Phone_Number: input.Phone_Number, Email: input.Email, Time_Slot: input.Time_Slot}
-	// 	models.DB.Create(&biodata)
-	// 	context.JSON(201, gin.H{"success": true, "result": biodata, "errorMessage": nil})
-	// }
 }
 
+// func count(context *gin.Context) {
+// 	count1 = db.Model(&Biodata{}).Where("time_slot = ?", "07.15").Count(&count)
+// 	count2 = db.Model(&Biodata{}).Where("time_slot = ?", "09.00").Count(&count)
+// 	count3 = db.Model(&Biodata{}).Where("time_slot = ?", "13.00").Count(&count)
+// 	count4 = db.Model(&Biodata{}).Where("time_slot = ?", "16.00").Count(&count)
 
-// count1 = db.Model(&Biodata{}).Where("timeslot = ?", "07.15").Count(&count)
-// count2 = db.Model(&Biodata{}).Where("timeslot = ?", "09.00").Count(&count)
-// count3 = db.Model(&Biodata{}).Where("timeslot = ?", "13.00").Count(&count)
-// count4 = db.Model(&Biodata{}).Where("timeslot = ?", "16.00").Count(&count)
+// 	if count1 > 5 {
+// 		context.JSON(201, gin.H{"success": true, "result": "Maaf, kuota jemaat untuk sesi ibadah jam 07.15 sudah penuh.", "errorMessage": nil})
+// 		return
+// 	}
 
-// if count1 > 50 {
-// 	return "Maaf, kuota jemaat untuk sesi ibadah jam 07.15 sudah penuh."
-// }
+// 	if count2 > 50 {
+// 		context.JSON(201, gin.H{"success": true, "result": "Maaf, kuota jemaat untuk sesi ibadah jam 09.00 sudah penuh.", "errorMessage": nil})
+// 		return
+// 	}
 
-// if count2 > 50 {
-// 	return "Maaf, kuota jemaat untuk sesi ibadah jam 09.00 sudah penuh."
-// }
+// 	if count3 > 50 {
+// 		context.JSON(201, gin.H{"success": true, "result": "Maaf, kuota jemaat untuk sesi ibadah jam 13.00 sudah penuh.", "errorMessage": nil})
+// 		return
+// 	}
 
-// if count3 > 50 {
-// 	return "Maaf, kuota jemaat untuk sesi ibadah jam 13.00 sudah penuh."
-// }
-
-// if count4 > 50 {
-// 	return "Maaf, kuota jemaat untuk sesi ibadah jam 16.00 sudah penuh."
+// 	if count4 > 50 {
+// 		context.JSON(201, gin.H{"success": true, "result": "Maaf, kuota jemaat untuk sesi ibadah jam 16.00 sudah penuh.", "errorMessage": nil})
+// 		return
+// 	}
 // }
